@@ -44,10 +44,33 @@ function editarCampeonato(id:number){
     (document.getElementById("tipo") as HTMLSelectElement).value = campeonato.tipo;
     (document.getElementById("dataInicio") as HTMLInputElement).value = campeonato.dataInicio;
     (document.getElementById("dataFim") as HTMLInputElement).value = campeonato.dataFim;
+
+    //findIndex buscar o index do objeto
+    const campIndex = campeonatos.findIndex (
+      (c:Campeonato) => c.id == id );
+    
+      //Validar se encontrou algum item
+      if(campIndex !== -1) {
+        //Remover da lista
+        campeonatos.splice(campIndex, 1)
+      }
+
+      salvarLocalStorage()
+      atualizarTabela()
 }
 
 function removerCampeonato(id:number) {
+  const campIndex = campeonatos.findIndex (
+    (c:Campeonato) => c.id == id );
+  
+    //Validar se encontrou algum item
+    if(campIndex !== -1) {
+      //Remover da lista
+      campeonatos.splice(campIndex, 1)
+    }
 
+    salvarLocalStorage()
+    atualizarTabela()
 }
 
 function salvarLocalStorage() {
@@ -60,10 +83,10 @@ function salvar(event:Event) {
   const novoCampeonato: Campeonato = {
     id: Date.now(),
     categoria: (document.getElementById("categoria") as HTMLSelectElement).value,
-    dataFim: "2025-10-30",
-    dataInicio: "2025-04-01",
+    dataFim: (document.getElementById("dataFim") as HTMLInputElement).value,
+    dataInicio:(document.getElementById("dataInicio") as HTMLInputElement).value,
     nome: (document.getElementById("nome") as HTMLInputElement).value,
-    tipo: "pontos-corridos",
+    tipo: (document.getElementById("tipo") as HTMLSelectElement).value 
   };
   campeonatos.push(novoCampeonato)
   atualizarTabela()

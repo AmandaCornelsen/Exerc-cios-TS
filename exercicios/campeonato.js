@@ -31,8 +31,25 @@ function editarCampeonato(id) {
     document.getElementById("tipo").value = campeonato.tipo;
     document.getElementById("dataInicio").value = campeonato.dataInicio;
     document.getElementById("dataFim").value = campeonato.dataFim;
+    //findIndex buscar o index do objeto
+    const campIndex = campeonatos.findIndex((c) => c.id == id);
+    //Validar se encontrou algum item
+    if (campIndex !== -1) {
+        //Remover da lista
+        campeonatos.splice(campIndex, 1);
+    }
+    salvarLocalStorage();
+    atualizarTabela();
 }
 function removerCampeonato(id) {
+    const campIndex = campeonatos.findIndex((c) => c.id == id);
+    //Validar se encontrou algum item
+    if (campIndex !== -1) {
+        //Remover da lista
+        campeonatos.splice(campIndex, 1);
+    }
+    salvarLocalStorage();
+    atualizarTabela();
 }
 function salvarLocalStorage() {
     let campeonatosSalvar = JSON.stringify(campeonatos);
@@ -43,10 +60,10 @@ function salvar(event) {
     const novoCampeonato = {
         id: Date.now(),
         categoria: document.getElementById("categoria").value,
-        dataFim: "2025-10-30",
-        dataInicio: "2025-04-01",
+        dataFim: document.getElementById("dataFim").value,
+        dataInicio: document.getElementById("dataInicio").value,
         nome: document.getElementById("nome").value,
-        tipo: "pontos-corridos",
+        tipo: document.getElementById("tipo").value
     };
     campeonatos.push(novoCampeonato);
     atualizarTabela();
