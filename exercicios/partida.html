@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de partidas</title>
+</head>
+<body>
+    <h1>Cadastro de partidas</h1>
+    <form id="formPartida">
+        <p>
+          Time mandante:
+          <input type="text" placeholder="Time mandante" id="mandante" />
+        </p>
+          <p>      
+              Time visitante:
+              <input type="text" placeholder="Time visitante" id="visitante" />
+          </p>
+          <p>
+            Campeonato:
+            <select id="tipo">
+              <option>Selecione</option>
+              <option>mata-mata</option>
+              <option>pontos-corridos</option>
+            </select>
+          </p> 
+          <p>
+            Data: <input type="date" id="dataInicio"/>
+        </form>
+        <input type="button" onclick="salvar(event)" value="cadastrar" />
+</body>
+</html>
