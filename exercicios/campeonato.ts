@@ -16,17 +16,38 @@ interface Campeonato {
 
 function atualizarTabela() {
   tabelaCampeonato.innerHTML = "";
-  campeonatos.forEach(c  =>{
+  campeonatos.forEach(( c : Campeonato )  =>{
     tabelaCampeonato.innerHTML += `
     <tr>
          <td>${c.nome}</td>
          <td>${c.categoria}</td>
          <td>${c.tipo}</td>
-         <td>${c.inicio}</td>
-         <td>${c.termino}</td>
-    </tr>
+         <td>${c.dataInicio}</td>
+         <td>${c.dataFim}</td>
+         <td>
+          <button onclick="editarCampeonato(${c.id})"> Editar </button>
+          <button onclick="removerCampeonato(${c.id})"> Remover </button>
+         </td> 
+         </tr>
   `;
   })
+}
+
+function editarCampeonato(id:number){
+  //Find = buscar um elemento em um array
+  const campeonato = campeonatos.find(
+    (c : Campeonato) => c.id == id);
+
+    if(!campeonato) return;
+    (document.getElementById("nome") as HTMLInputElement).value = campeonato.nome;
+    (document.getElementById("categoria") as HTMLSelectElement).value = campeonato.categoria;
+    (document.getElementById("tipo") as HTMLSelectElement).value = campeonato.tipo;
+    (document.getElementById("dataInicio") as HTMLInputElement).value = campeonato.dataInicio;
+    (document.getElementById("dataFim") as HTMLInputElement).value = campeonato.dataFim;
+}
+
+function removerCampeonato(id:number) {
+
 }
 
 function salvarLocalStorage() {
@@ -38,7 +59,7 @@ function salvar(event:Event) {
   event?.preventDefault(); //cancelar o disparo do evento
   const novoCampeonato: Campeonato = {
     id: Date.now(),
-    categoria: "masculino",
+    categoria: (document.getElementById("categoria") as HTMLSelectElement).value,
     dataFim: "2025-10-30",
     dataInicio: "2025-04-01",
     nome: (document.getElementById("nome") as HTMLInputElement).value,
@@ -47,6 +68,8 @@ function salvar(event:Event) {
   campeonatos.push(novoCampeonato)
   atualizarTabela()
   salvarLocalStorage()
+  formCampeonato.reset()
+  alert('Cadastro com sucesso!')
 }
 
 formCampeonato.addEventListener("submit", salvar)
