@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <header>
+        <a href="/Exerc-cios-TS-main/exercicios/partida.html">Partida</a>
+        <hr>
+        <a href="/Exerc-cios-TS-main/exercicios/campeonato.html">Campeonato</a>
+      </header>
+
+    <h2>Cadastro de Time</h2>
+    <form id="formTime">
+        <p>
+            Nome do time: 
+            <input type="text" placeholder="Nome do Time" id="nomeTime" />
+        </p>
+        <p>
+            Nome curto: 
+            <input type="text" placeholder="Nome curto" id="nomeCurto" />
+        </p>
+        <input type="submit" onclick="salvarTime(event)" value="Cadastrar" />
+    </form>
+
+    <hr>
+
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Nome do Time</th>
+                <th>Nome Curto</th>
+                <th>Ação</th>
+            </tr>
+        </thead>
+        <tbody id="tbTime">
+        
+        </tbody>
+    </table>
+
+    <script type="text/javascript" src="time.js"></script>
+</body>
+</html>
